@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sprint-3-back
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sprint-3-back
+  template:
+    metadata:
+      labels:
+        app: sprint-3-back
+    spec:
+      containers:
+      - name: sprint-3-back
+        image: {PROJECT_ID}/{REPOSITORY}/{IMAGE}:{GITHUB_SHA}
+        ports:
+        - containerPort: 8989
+        resources:
+          # You must specify requests for CPU to autoscale
+          # based on CPU utilization
+          limits:
+            cpu: 50m
+            memory: 128Mi
+          requests:
+            cpu: 50m
+            memory: 128Mi
